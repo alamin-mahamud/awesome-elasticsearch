@@ -1,4 +1,11 @@
 # Elasticsearch
+
+* Run ElasticSearch using Docker Compose
+
+``` shell
+docker-compose up --build
+```
+
 * Monitor Health check
 ``` shell
 curl -X GET "localhost:9200/_cat/health?v"
@@ -19,3 +26,34 @@ ip         heap.percent ram.percent cpu load_1m load_5m load_15m node.role maste
 172.30.0.2           11          93  13    1.18    1.96     1.58 mdi       *      u0eQjEH
 ```
 
+* List Indices
+``` shell
+curl -X GET "localhost:9200/_cat/indices?v"
+```
+
+``` shell
+PUT /customer?pretty
+GET /_cat/indices?v
+```
+
+* Insert a document
+``` shell
+curl -X PUT "localhost:9200/customer/_doc/1?pretty" -H 'Content-Type: application/json' -d'
+{
+  "name": "John Doe"
+}
+'
+
+```
+* Get a Document
+``` shell
+curl -X GET "localhost:9200/customer/_doc/1?pretty"
+```
+
+* Loading the sample dataset
+
+``` shell	 
+curl -H "Content-Type: application/json" \
+     -X POST "localhost:9200/bank/_doc/_bulk?pretty&refresh" \
+	 --data-binary "@data/bank-account.json"
+```
