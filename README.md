@@ -1,4 +1,5 @@
 # Elasticsearch
+* Monitor Health check
 ``` shell
 curl -X GET "localhost:9200/_cat/health?v"
 ```
@@ -8,6 +9,7 @@ epoch      timestamp cluster        status node.total node.data shards pri relo 
 1547898883 11:54:43  docker-cluster green           1         1      1   1    0    0        0             0                  -                100.0%
 ```
 
+* Nodes Details
 ``` shell
 curl -X GET "localhost:9200/_cat/nodes?v"
 ```
