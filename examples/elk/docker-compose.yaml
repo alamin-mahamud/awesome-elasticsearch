@@ -1,0 +1,33 @@
+# PRODUCTION GRADE ELK
+
+version: '3'
+
+
+
+services:
+
+
+  # Data Collection
+  beats:
+
+
+  # Data Collection Resiliencey
+  # Buffering
+  redis:
+  kafka:
+  rabbitmq:
+
+
+  # Data Aggregation & Processing
+  logstash:
+
+
+  # Indexing and Storage
+  elasticsearch:
+
+
+  # NGINX
+  nginx:
+
+  # Analysis & Visualization
+  kibana:
