@@ -32,4 +32,10 @@ Basically, ES is great as long as it used for its intended usage ie, distributed
 
 ## How To Guides
 
+- Run ES
+
+```shell
+$ curl 'http://localhost:9200/?pretty'
+```
+
 ## Resources
