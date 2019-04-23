@@ -32,10 +32,76 @@ Basically, ES is great as long as it used for its intended usage ie, distributed
 
 ## How To Guides
 
-- Run ES
+#### RUN ELK
 
 ```shell
-$ curl 'http://localhost:9200/?pretty'
+cd examples/elk/docker-elk
+export ELK_VERSION=7.0.0; docker-compose up
 ```
+
+#### Kibana console
+
+- in browser goto - `http://localhost:5601/app/kibana`
+
+#### CheatSheet
+
+- REST API Syntax
+
+```shell
+<HTTP Verb> /<Index>/<Endpoint>/<ID>
+```
+
+- Create Index, Get Index, Create and Get Documents 
+
+```shell
+# create an index
+PUT /customer?pretty
+
+# get all indices
+GET /_cat/indices?v
+
+# index a document
+PUT /customer/_doc/1?pretty
+{
+  "name": "John Doe"
+}
+
+# query a document
+GET /customer/_doc/1?pretty
+
+# Outputs
+{
+  "_index" : "customer",
+  "_type" : "_doc",
+  "_id" : "1",
+  "_version" : 1,
+  "_seq_no" : 25,
+  "_primary_term" : 1,
+  "found" : true,                       # Here found tells us that elasticsearch found the document
+  "_source" : { "name": "John Doe" }    # this is the origin JSON Document
+}
+
+# Delete an Index
+DELETE /customer?pretty
+```
+
+- BATCH Processing
+
+```shell
+POST /customer/_bulk?pretty
+{"index":{"_id":"1"}}
+{"name": "John Doe" }
+{"index":{"_id":"2"}}
+{"name": "Jane Doe" }
+```
+
+```shell
+POST /customer/_bulk?pretty
+{"update": {"_id": "1"}}
+{"doc": {"name": "Alamin Mahamud Rocks"}}
+{"delete": {"_id":"2"}}
+```
+
+The Bulk API does not fail due to failures in one of the actions. If a single action fails for whatever reason, it will continue to process the remainder of the actions after it. When the bulk API returns, it will provide a status for each action (in the same order it was sent in) so that you can check if a specific action failed or not.
 
 ## Resources
