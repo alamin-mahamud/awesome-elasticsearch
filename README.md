@@ -104,4 +104,6 @@ POST /customer/_bulk?pretty
 
 The Bulk API does not fail due to failures in one of the actions. If a single action fails for whatever reason, it will continue to process the remainder of the actions after it. When the bulk API returns, it will provide a status for each action (in the same order it was sent in) so that you can check if a specific action failed or not.
 
+
+
 ## Resources
