@@ -11,6 +11,10 @@
 
 ### What Problem it Solves
 
+When we need to search massive amounts of data based on RDBMS, typically they are stored in normalized order in multiple tables. It takes A lot of time to complete queries. And Aggregations are also a nightmare if the dataset is huge. That's where Elasticsearch comes in.
+
+Sure you can implement Google Custom Search or Other Functionality. But what about customization according to your use-case and further processing with the search logs and data. Elasticsearch has countless usability when it comes to text based search.
+
 ### Previous Solutions to this problem
 
 What about systems like Postgres, that come with full-text search and ACID-transactions? (Other examples are the full-text capabilities of MySQL, MongoDB, Riak, etc.) While you can implement basic search with Postgres, there’s a huge gap both in possible performance, and in the features. As mentioned in the section on transactions, Elasticsearch can “cheat” and do a lot of caching, with no concern for multi version concurrency control and other complicating things. Search is also more than finding a keyword in a piece of text: it’s about applying domain specific knowledge to implement good relevancy models, giving an overview of the entire result space, and doing things like spell checking and autocompletion. All while being fast.
@@ -19,7 +23,11 @@ Elasticsearch is commonly used in addition to another database. A database syste
 
 Elasticsearch is great when you need text based information quickly indexed and later queried. It is an extremely fast database where data is queried in almost >10ms
 
+None of the Existing DBs were **designed from scratch** to provide **scalable full-text search**.
+
 ### How elasticsearch is better than them
+
+**Full Text Search** - means when you search through the records in an ElasticSearch database (cluster) your search term(s) will be searched for everywhere in the desired field(s) of the document. For example: Imagine you have a blog and each blog post has: Title, Intro, Body and Comments section. When searching for a particular string e.g: "this is awesomeness", you could search in all-the-fields which could return a result in one of the comments.
 
 ### Is there New Problems
 
@@ -32,18 +40,18 @@ Basically, ES is great as long as it used for its intended usage ie, distributed
 
 ## How To Guides
 
-#### RUN ELK
+### RUN ELK
 
 ```shell
 cd examples/elk/docker-elk
 export ELK_VERSION=7.0.0; docker-compose up
 ```
 
-#### Kibana console
+### Kibana console
 
 - in browser goto - `http://localhost:5601/app/kibana`
 
-#### CheatSheet
+### CheatSheet
 
 - REST API Syntax
 
@@ -103,7 +111,5 @@ POST /customer/_bulk?pretty
 ```
 
 The Bulk API does not fail due to failures in one of the actions. If a single action fails for whatever reason, it will continue to process the remainder of the actions after it. When the bulk API returns, it will provide a status for each action (in the same order it was sent in) so that you can check if a specific action failed or not.
-
-
 
 ## Resources
